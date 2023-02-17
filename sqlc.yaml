@@ -1,0 +1,14 @@
+version: "2"
+sql:
+  - engine: "postgresql"   
+    queries: "./db/query" 
+    schema: "./db/migration"    # Directory of SQL migrations or path to single SQL file; or a list of paths.
+    gen:
+      go:
+        package: "db"  # the name of the go package that sqlc will generate  
+        out: "./db/sqlc"   
+        emit_json_tags: true    # add json tags to generated structs
+        emit_prepared_queries: false  # include support for prepared queries 
+        emit_interface:  true  # output a Querier interface in the generated package
+        emit_exact_table_names:  false # If true, struct names will mirror table names. Otherwise, sqlc attempts to singularize plural table names. 
+        emit_empty_slices:  true # slices returned by :many queries will be empty, instead of nil
